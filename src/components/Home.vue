@@ -3,18 +3,11 @@
     <mt-header fixed title="固定在顶部"></mt-header>
     <div class="sroll-nav-bar">
       <ul>
-        <li
-        @click='tabChange' data-key='1'>咨询</li>
-        <li
-        @click='tabChange' data-key='2'>新闻</li>
-        <li
-        @click='tabChange' data-key='3'>热门</li>
-        <li
-        @click='tabChange' data-key='4'>推单</li>
+        <li v-for="item in navList" :key="item.key" @click="tabChange(item.key)">{{item.title}}</li>
       </ul>
     </div>
     <div class="content-wrapper">
-      <section>{{content}}</section>
+      <section><component v-bind:is="content"></component></section>
     </div>
     <Footer/>
   </div>
@@ -35,23 +28,31 @@ export default {
     Bill,
     Footer
   },
-  data: {
-    content: new Consult()
+  data: function() {
+    return {
+      navList: [
+        {key: 0, title: '咨询'},
+        {key: 1, title: '新闻'},
+        {key: 2, title: '热门'},
+        {key: 3, title: '推单'},
+      ],
+    content: Consult
+    }
   },
   props: {},
   methods: {
-    tabChange: function(e) {
-      switch(e.target.getAttribute('data-key')) {
-        case '1':
+    tabChange: function(key) {
+      switch(key) {
+        case 0:
         this.content = Consult;
         break;
-        case '2':
+        case 1:
         this.content = News;
         break;
-        case '3':
+        case 2:
         this.content = Hot;
         break;
-        case '4':
+        case 3:
         this.content = Bill;
         break;
         default:
