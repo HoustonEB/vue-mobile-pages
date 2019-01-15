@@ -131,7 +131,7 @@ export default {
       }
       .detail-btn {
         position: absolute;
-        right: 0;
+        left: 70px;
         bottom: 0;
       }
     }

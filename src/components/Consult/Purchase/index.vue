@@ -1,7 +1,7 @@
 <template>
   <div class="purchase-wrapper">
     <div class="top-back-header">
-      <mt-header :title="title">
+      <mt-header fixed :title="title">
         <router-link to="/" slot="left">
           <mt-button icon="back">返回</mt-button>
         </router-link>
@@ -24,7 +24,7 @@
       </div>
     </div>
     <transition name="fade">
-        <Loading v-show="loading"/>
+      <Loading v-show="loading"/>
     </transition>
   </div>
 </template>
@@ -62,10 +62,14 @@ export default {
 };
 </script>
 <style scoped lang='less'>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.form-content {
+  padding-top: 40px;
 }
 </style>
