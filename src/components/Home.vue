@@ -1,62 +1,64 @@
 <template>
   <div id="home">
+    <!-- Header -->
     <mt-header fixed title="固定在顶部"></mt-header>
+    <!-- Tab -->
     <div class="sroll-nav-bar">
       <ul>
         <li v-for="item in navList" :key="item.key" @click="tabChange(item.key)">{{item.title}}</li>
       </ul>
     </div>
+    <!-- Component -->
     <div class="content-wrapper">
-      <section><component v-bind:is="content"></component></section>
+      <section>
+        <component v-bind:is="content"></component>
+      </section>
     </div>
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Consult from './Consult/index.vue';
-import News from './News/index.vue';
-import Hot from './Hot/index.vue';
-import Bill from './Bill/index.vue';
-import Footer from './Footer/Footer.vue';
+import Consult from "./Consult/index.vue";
+import News from "./News/index.vue";
+import Hot from "./Hot/index.vue";
+import Bill from "./Bill/index.vue";
 export default {
   name: "Home",
   components: {
     Consult,
     News,
     Hot,
-    Bill,
-    Footer
+    Bill
   },
   data: function() {
     return {
       navList: [
-        {key: 0, title: '咨询'},
-        {key: 1, title: '新闻'},
-        {key: 2, title: '热门'},
-        {key: 3, title: '推单'},
+        { key: 0, title: "咨询" },
+        { key: 1, title: "新闻" },
+        { key: 2, title: "热门" },
+        { key: 3, title: "推单" }
       ],
-    content: Consult
-    }
+      content: Consult
+    };
   },
   props: {},
   methods: {
     tabChange: function(key) {
-      switch(key) {
+      switch (key) {
         case 0:
-        this.content = Consult;
-        break;
+          this.content = Consult;
+          break;
         case 1:
-        this.content = News;
-        break;
+          this.content = News;
+          break;
         case 2:
-        this.content = Hot;
-        break;
+          this.content = Hot;
+          break;
         case 3:
-        this.content = Bill;
-        break;
+          this.content = Bill;
+          break;
         default:
-        this.content = Consult;
+          this.content = Consult;
       }
     }
   }
