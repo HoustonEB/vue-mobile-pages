@@ -67,6 +67,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang='less'>
+#home {
+  width: 100%;
+  height: 100%;
+}
 .sroll-nav-bar {
   width: 100%;
   height: 80px;
@@ -93,5 +97,10 @@ export default {
       }
     }
   }
+}
+.content-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
 }
 </style>

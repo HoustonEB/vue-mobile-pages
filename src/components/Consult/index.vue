@@ -40,7 +40,8 @@ export default {
         { id: 1, msg: "1号" },
         { id: 2, msg: "2号" },
         { id: 3, msg: "3号" },
-        { id: 4, msg: "4号" }
+        { id: 4, msg: "4号" },
+        { id: 5, msg: "5号" }
       ]
     };
   },
@@ -56,6 +57,12 @@ export default {
     },
     entryShop: function(id, e) {
       console.log("entery-shop");
+      this.$router.push({
+        path: 'purchase',
+        query: {
+          id: id
+        }
+      })
     }
   }
 };
@@ -65,7 +72,9 @@ export default {
 <style scoped lang='less'>
 .consult-wrapper {
   width: 100%;
-  height: 200px;
+  .mint-swipe {
+    height: 200px;
+  }
   .mint-swipe-item:nth-child(1) {
     background-color: rgb(71, 216, 42);
     background-image: url(../../assets/images/1.jpg);
@@ -91,13 +100,15 @@ export default {
     padding: 10px;
     display: flex;
     border-bottom: 1px solid #e8e8e8;
+    transition: all .5s;
     &:hover {
+      box-shadow: 0 0 3px 3px #e8e8e8;
       img {
         transform: scale(1.3);
       }
     }
     &:nth-last-child(1) {
-      margin-bottom: 50px;
+      margin-bottom: 130px;
       border-bottom: none;
     }
     .left-image {

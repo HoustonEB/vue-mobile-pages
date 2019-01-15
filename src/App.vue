@@ -2,10 +2,10 @@
   <div id="app">
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
-    <transition :name="transitionName">
+    <transition name="slide-fade" mode="out-in">
       <router-view></router-view>
     </transition>
-    <Footer/>
+    <Footer v-show="showFooter"/>
   </div>
 </template>
 
@@ -16,7 +16,10 @@ export default {
   name: "app",
   data: function() {
     return {
-      transitionName: 'slide-left'
+      transitionName: 'slide-left',
+      constWindowHeight: '',
+      resizeWindowHeight: '',
+      showFooter: true
     }
   },
   components: {
@@ -28,6 +31,18 @@ export default {
       const fromDepth = from.path.split("/").length;
       this.transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
     }
+  },
+    mounted: function() {
+      this.constWindowHeight = document.documentElement.clientHeight;
+      console.log('m', this.constWindowHeight)
+      window.onresize = function() {
+          console.log('resize');
+          if (this.constWindowHeight >= this.resizeWindowHeight) {
+            this.showFooter = false;
+          } else {
+            this.showFooter = false;
+          }
+      }
   }
 };
 </script>
@@ -39,6 +54,16 @@ export default {
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
 ul li {
   list-style: none;
 }
@@ -48,11 +73,18 @@ a {
   color: #34495e;
   -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
-
-.slide-left {
-  left: 0px;
-  position: absolute;
-  transition: all 2s;
-  background-color: #000;
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+  transition: all .3s ease;
 }
+.slide-fade-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
 </style>
